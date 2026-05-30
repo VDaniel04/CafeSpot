@@ -28,5 +28,5 @@ python manage.py runserver
 
 👥 Colaboratori
 
-Drincă Alexia-Maria
+Drincă Alexia-Maria,
 Vișean Pompiliu-Daniel
