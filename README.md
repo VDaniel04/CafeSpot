@@ -19,14 +19,14 @@ Management: Git/GitHub
 🚀 Instalare
 
 Bash
-git clone https://github.com/VDaniel04/CafeSpot.git
-cd CafeSpot
-python -m venv venv
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+git clone https://github.com/VDaniel04/CafeSpot.git  
+cd CafeSpot  
+python -m venv venv  
+pip install -r requirements.txt  
+python manage.py migrate  
+python manage.py runserver  
 
 👥 Colaboratori
 
-Drincă Alexia-Maria,
+Drincă Alexia-Maria  
 Vișean Pompiliu-Daniel
