@@ -1,0 +1,75 @@
+{% extends 'cafespot/base.html' %}
+
+{% block content %}
+    <style>
+        /* Stiluri pentru a controla aspectul acestui formular */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Aici micșorăm specificațiile pentru username și parolă */
+        .help-text {
+            font-size: 11px; /* Textul este considerabil mai mic */
+            opacity: 0.8;    /* Ușor transparent ca să nu distragă atenția */
+            margin-top: -10px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        /* Django generează o listă <ul> pentru regulile parolei, o stilizăm și pe ea */
+        .help-text ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+        .help-text li {
+            margin-bottom: 3px;
+        }
+
+        .error-text {
+            color: #ff4d4d; /* Roșu pentru erori de completare */
+            font-size: 13px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <h2>Creare Cont Nou</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+
+                {{ field }}
+
+                {% if field.errors %}
+                    <div class="error-text">
+                        {% for error in field.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if field.help_text %}
+                    {% if field.name != 'password2' and field.label != 'Password confirmation' %}
+                        <div class="help-text">
+                            {{ field.help_text|safe }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn" style="margin-top: 10px;">Înregistrare</button>
+    </form>
+
+    <p style="margin-top: 20px;">
+        Ai deja cont? <a href="{% url 'login' %}" style="color: #C07F00; font-weight: bold;">Conectează-te aici</a>.
+    </p>
+{% endblock %}

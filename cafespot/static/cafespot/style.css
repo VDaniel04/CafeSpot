@@ -1,0 +1,148 @@
+/* --- Paleta de culori CafeSpot --- */
+:root {
+    --latte: #F9F6F0;
+    --espresso: #3B2818;
+    --caramel: #C07F00;
+    --caramel-dark: #A36B00;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('cafespot.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    color: var(--latte);
+    margin: 0;
+}
+
+.navbar {
+    background-color: rgba(59, 40, 24, 0.95);
+    padding: 15px 30px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.navbar-user{
+    display:flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.navbar a {
+    color: var(--latte);
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: var(--caramel);
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    color: var(--espresso);
+}
+
+.btn {
+    padding: 10px 18px;
+    background-color: var(--caramel);
+    color: white;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--caramel-dark);
+}
+
+/* Formulare */
+input[type="text"], input[type="password"], input[type="number"],
+input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--caramel);
+    border-radius: 6px;
+    color: var(--espresso);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--caramel-dark);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Carduri */
+.card {
+    background-color: #FCFAEF;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-left: 5px solid var(--caramel);
+    color: var(--espresso);
+}
+
+.card p {
+    color: var(--espresso) !important;
+}
+
+/* Steluțe - Forțate la stânga */
+/* Forțăm containerul părinte să nu mai împingă nimic la dreapta */
+form {
+    text-align: left !important;
+}
+
+/* Forțăm blocul de steluțe să ocupe tot spațiul și să se alinieze la stânga */
+/* Containerul care forțează stânga absolută */
+.stars-container-fix {
+    display: flex !important;
+    justify-content: flex-start !important; /* Forțăm stânga */
+    width: 100% !important;
+    margin: 5px 0 15px 0 !important;
+}
+
+.stars-rating {
+    display: flex !important;
+    flex-direction: row-reverse; /* Logica de hover */
+    justify-content: flex-start !important; /* Forțăm stânga și aici */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.stars-rating input {
+    appearance: none !important;      /* Anulează stilul nativ al browserului */
+    -webkit-appearance: none !important;
+    display: none !important;         /* Ascunde complet elementul */
+    visibility: hidden;               /* Asigurare extra */
+    position: absolute;               /* Să nu ocupe spațiu deloc */
+}
+
+.stars-rating label {
+    font-size: 35px;
+    color: #ccc;
+    cursor: pointer;
+    margin: 0 2px !important;
+    display: inline-block;            /* Asigură-te că label-ul e tratat ca un obiect */
+}
+
+/* Efect de aurire */
+.stars-rating label:hover,
+.stars-rating label:hover ~ label,
+.stars-rating input:checked ~ label {
+    color: #FFC107 !important;
+}

@@ -1,0 +1,19 @@
+{% extends 'cafespot/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Cafenelele tale favorite ⭐</h2>
+    <hr>
+
+    {% if cafenele %}
+        {% for cafenea in cafenele %}
+            <div class="card">
+                <h3><a href="{% url 'detalii_cafenea' cafenea.id %}">{{ cafenea.nume }}</a></h3>
+                <p>{{ cafenea.adresa }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Nu ai adăugat încă nicio cafenea la favorite.</p>
+    {% endif %}
+</div>
+{% endblock %}

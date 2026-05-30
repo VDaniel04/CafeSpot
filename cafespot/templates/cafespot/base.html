@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>CafeSpot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'cafespot/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{% url 'lista_cafenele' %}" style="font-size: 20px;">☕ CafeSpot</a>
+        </div>
+
+        <div class="navbar-user">
+            {% if user.is_authenticated %}
+            <span style="margin-right: 15px;">Salut, {{ user.username }}!</span>
+            <a href="{% url 'lista_favorite' %}" style="font-size: 20px; text-decoration: none;">❤️</a>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn" style="background-color: #8B0000; color: white; border: none; font-weight: bold; padding: 8px 15px;">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Autentificare</a>
+                <a href="{% url 'register' %}">Înregistrare</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

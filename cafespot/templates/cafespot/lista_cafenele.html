@@ -1,0 +1,28 @@
+{% extends 'cafespot/base.html' %}
+
+{% block content %}
+    <h2>Descoperă Cafenele</h2>
+    
+    <form method="GET" action="" style="margin-bottom: 20px;">
+        <input type="text" name="q" placeholder="Caută după nume sau locație..." value="{{ query|default_if_none:'' }}" style="padding: 8px; width: 60%;">
+        <button type="submit" class="btn">Caută</button>
+    </form>
+
+    {% for cafenea in cafenele %}
+        <div class="card" style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(6px); border-color: rgba(192, 127, 0, 0.5);">
+            <h3><a href="{% url 'detalii_cafenea' cafenea.id %}">{{ cafenea.nume }}</a></h3>
+            <p>📍 {{ cafenea.adresa }}</p>
+            <p>{{ cafenea.descriere }}</p>
+            <p>
+                Rating:
+                {% if cafenea.rating_mediu %}
+                    ⭐ {{ cafenea.rating_mediu|floatformat:1 }} / 5
+                {% else %}
+                    Fără recenzii
+                {% endif %}
+            </p>
+        </div>
+    {% empty %}
+        <p>Nu s-au găsit cafenele.</p>
+    {% endfor %}
+{% endblock %}

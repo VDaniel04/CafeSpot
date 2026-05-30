@@ -1,0 +1,66 @@
+{% extends 'cafespot/base.html' %}
+
+{% block content %}
+<div class="card" style="background: rgba(255, 255, 255, 0.8); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+
+    {% if cafenea.imagine %}
+    <div style="margin-bottom: 20px; border-radius: 15px; overflow: hidden; max-height: 400px;">
+        <img src="{{ cafenea.imagine.url }}" alt="{{ cafenea.nume }}" style="width: 100%; height: auto; object-fit: cover;">
+    </div>
+    {% endif %}
+
+    <h2>{{ cafenea.nume }}</h2>
+    <p>📍 <strong>Adresă:</strong> {{ cafenea.adresa }}</p>
+    {% if cafenea.program %}
+        <p>🕒 <strong>Program:</strong> {{ cafenea.program }}</p>
+    {% endif %}
+    <p>📝 {{ cafenea.descriere }}</p>
+
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'toggle_favorit' cafenea.id %}" style="margin-bottom: 20px;">
+            {% csrf_token %}
+            <button type="submit" class="btn" style="background-color: #ffc107; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                {% if este_favorita %}⭐ Elimină din Favorite{% else %}☆ Adaugă la Favorite{% endif %}
+            </button>
+        </form>
+    {% endif %}
+
+    <div style="margin-top: 20px; border-radius: 15px; overflow: hidden; border: 2px solid rgba(192, 127, 0, 0.5);">
+        <iframe width="100%" height="300" frameborder="0" src="https://maps.google.com/maps?q={{ cafenea.latitudine }},{{ cafenea.longitudine }}&hl=ro&z=15&output=embed"></iframe>
+    </div>
+</div>
+
+<hr>
+
+<h3>Recenzii ({{ recenzii.count }})</h3>
+{% for recenzie in recenzii %}
+    <div class="card" style="background: rgba(255, 255, 255, 0.9); padding: 15px; margin-bottom: 10px; border-radius: 10px;">
+        <p><strong>{{ recenzie.user.username }}</strong> - ⭐ {{ recenzie.rating }}/5</p>
+        <p>{{ recenzie.comentariu }}</p>
+    </div>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <h4>Lasă o recenzie:</h4>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Alege rating-ul:</label>
+        <div class="stars-container-fix">
+            <div class="stars-rating">
+                <input type="radio" name="rating" value="5" id="star5" required><label for="star5">★</label>
+                <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+            </div>
+        </div>
+
+        <textarea name="comentariu" rows="3" style="width: 100%; border-radius: 8px; padding: 10px;" placeholder="Scrie recenzia ta aici..."></textarea>
+        <button type="submit" class="btn" style="margin-top: 10px;">Trimite Recenzia</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Autentifică-te</a> pentru a lăsa o recenzie.</p>
+{% endif %}
+
+{% endblock %}
